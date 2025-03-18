@@ -28,14 +28,18 @@
     {
       "name": "Jesutomiwa Salam",
       "email": "jesutomiwathefirst@gmail.com"
+    },
+    {
+      "name": "Paul Alcos",
+      "email": "paaalcos@gmail.com"
     }
   ],
   "minimum-stability": "dev",
   "require": {
     "php": "^8.0",
-    "illuminate/config": "^8.0 || ^9.0 || ^10.0",
-    "illuminate/database": "^8.0|^9.0|^10.0",
-    "illuminate/support": "^8.0|^9.0|^10.0",
+    "illuminate/config": "^8.0 || ^9.0 || ^10.0 || ^11.0",
+    "illuminate/database": "^8.0|^9.0|^10.0|^11.0",
+    "illuminate/support": "^8.0|^9.0|^10.0|^11.0",
     "laravel/serializable-closure": "^1.2.2"
   },
   "require-dev": {
