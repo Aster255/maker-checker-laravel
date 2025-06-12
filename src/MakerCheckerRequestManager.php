@@ -205,9 +205,9 @@ class MakerCheckerRequestManager
             throw RequestCannotBeChecked::create('Expired request.');
         }
 
-        if ($checker->is($request->maker)) {
-            throw RequestCannotBeChecked::create('Request checker cannot be the same as the maker.');
-        }
+        // if ($checker->is($request->maker)) {
+        //     throw RequestCannotBeChecked::create('Request checker cannot be the same as the maker.');
+        // }
     }
 
     private function executeCallbackHook(MakerCheckerRequestInterface $request, string $hook): void
