@@ -16,12 +16,12 @@
   "license": "MIT",
   "autoload": {
     "psr-4": {
-      "Prismaticoder\\MakerChecker\\": "src/"
+      "Aster255\\MakerChecker\\": "src/"
     }
   },
   "autoload-dev": {
     "psr-4": {
-      "Prismaticoder\\MakerChecker\\Tests\\": "tests"
+      "Aster255\\MakerChecker\\Tests\\": "tests"
     }
   },
   "authors": [
@@ -48,7 +48,7 @@
   "extra": {
     "laravel": {
       "providers": [
-        "Prismaticoder\\MakerChecker\\MakerCheckerServiceProvider"
+        "Aster255\\MakerChecker\\MakerCheckerServiceProvider"
       ]
     }
   }

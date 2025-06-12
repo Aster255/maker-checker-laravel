@@ -1,6 +1,6 @@
 <?php
 
-namespace Prismaticoder\MakerChecker\Contracts;
+namespace Aster255\MakerChecker\Contracts;
 
 abstract class ExecutableRequest
 {

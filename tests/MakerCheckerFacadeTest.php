@@ -1,25 +1,25 @@
 <?php
 
-namespace Prismaticoder\MakerChecker\Tests;
+namespace Aster255\MakerChecker\Tests;
 
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Cache;
 use Illuminate\Support\Facades\Event;
 use InvalidArgumentException;
-use Prismaticoder\MakerChecker\Enums\RequestStatuses;
-use Prismaticoder\MakerChecker\Enums\RequestTypes;
-use Prismaticoder\MakerChecker\Events\RequestApproved;
-use Prismaticoder\MakerChecker\Events\RequestFailed;
-use Prismaticoder\MakerChecker\Events\RequestInitiated;
-use Prismaticoder\MakerChecker\Events\RequestRejected;
-use Prismaticoder\MakerChecker\Exceptions\DuplicateRequestException;
-use Prismaticoder\MakerChecker\Exceptions\RequestCannotBeChecked;
-use Prismaticoder\MakerChecker\Exceptions\RequestCouldNotBeInitiated;
-use Prismaticoder\MakerChecker\Facades\MakerChecker;
-use Prismaticoder\MakerChecker\Models\MakerCheckerRequest;
-use Prismaticoder\MakerChecker\Tests\Executables\CreateArticleWithCacheEntry;
-use Prismaticoder\MakerChecker\Tests\Models\Article;
-use Prismaticoder\MakerChecker\Tests\Models\User;
+use Aster255\MakerChecker\Enums\RequestStatuses;
+use Aster255\MakerChecker\Enums\RequestTypes;
+use Aster255\MakerChecker\Events\RequestApproved;
+use Aster255\MakerChecker\Events\RequestFailed;
+use Aster255\MakerChecker\Events\RequestInitiated;
+use Aster255\MakerChecker\Events\RequestRejected;
+use Aster255\MakerChecker\Exceptions\DuplicateRequestException;
+use Aster255\MakerChecker\Exceptions\RequestCannotBeChecked;
+use Aster255\MakerChecker\Exceptions\RequestCouldNotBeInitiated;
+use Aster255\MakerChecker\Facades\MakerChecker;
+use Aster255\MakerChecker\Models\MakerCheckerRequest;
+use Aster255\MakerChecker\Tests\Executables\CreateArticleWithCacheEntry;
+use Aster255\MakerChecker\Tests\Models\Article;
+use Aster255\MakerChecker\Tests\Models\User;
 
 class MakerCheckerFacadeTest extends TestCase
 {
@@ -182,7 +182,7 @@ class MakerCheckerFacadeTest extends TestCase
         $payload = $this->getArticleCreationPayload();
         $request = $this->makingUser
             ->requestToCreate(Article::class, $payload)
-            ->afterApproval(fn ($request) => Cache::set('approved_request', $request->code))
+            ->afterApproval(fn($request) => Cache::set('approved_request', $request->code))
             ->save();
 
         Event::fake();
@@ -237,7 +237,7 @@ class MakerCheckerFacadeTest extends TestCase
         $payload = $this->getArticleCreationPayload();
         $request = $this->makingUser
             ->requestToCreate(Article::class, $payload)
-            ->afterRejection(fn ($request) => Cache::set('rejected_request', $request->code))
+            ->afterRejection(fn($request) => Cache::set('rejected_request', $request->code))
             ->save();
 
         Event::fake();
@@ -313,7 +313,7 @@ class MakerCheckerFacadeTest extends TestCase
 
         $request = $this->makingUser
             ->requestToCreate(Article::class, $payload)
-            ->onFailure(fn ($request, $e) => Cache::set('failed_request', $request->code))
+            ->onFailure(fn($request, $e) => Cache::set('failed_request', $request->code))
             ->save();
 
         $this->assertNull(Cache::get('failed_request'));
@@ -438,7 +438,7 @@ class MakerCheckerFacadeTest extends TestCase
 
         $request = $this->makingUser
             ->requestToCreate(Article::class, $this->getArticleCreationPayload())
-            ->tap(fn (MakerCheckerRequest $request) => $request->description = $customDescription)
+            ->tap(fn(MakerCheckerRequest $request) => $request->description = $customDescription)
             ->save();
 
         $this->assertDatabaseHas('maker_checker_requests', [
@@ -556,7 +556,7 @@ class MakerCheckerFacadeTest extends TestCase
 
         $this->checkingUser->approve($request);
 
-        $this->assertEquals(Cache::get('approved_executed_request'), RequestStatuses::APPROVED.'|'.$request->code);
+        $this->assertEquals(Cache::get('approved_executed_request'), RequestStatuses::APPROVED . '|' . $request->code);
 
         Event::assertDispatched(RequestApproved::class);
     }
@@ -572,7 +572,7 @@ class MakerCheckerFacadeTest extends TestCase
 
         $this->checkingUser->reject($request);
 
-        $this->assertEquals(Cache::get('rejected_executed_request'), RequestStatuses::REJECTED.'|'.$request->code);
+        $this->assertEquals(Cache::get('rejected_executed_request'), RequestStatuses::REJECTED . '|' . $request->code);
 
         Event::assertDispatched(RequestRejected::class);
     }
@@ -590,7 +590,7 @@ class MakerCheckerFacadeTest extends TestCase
 
         $this->checkingUser->approve($request);
 
-        $this->assertEquals(Cache::get('failed_executed_request'), RequestStatuses::FAILED.'|'.$request->code);
+        $this->assertEquals(Cache::get('failed_executed_request'), RequestStatuses::FAILED . '|' . $request->code);
 
         Event::assertDispatched(RequestFailed::class);
     }

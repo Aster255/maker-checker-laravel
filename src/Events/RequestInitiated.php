@@ -1,8 +1,8 @@
 <?php
 
-namespace Prismaticoder\MakerChecker\Events;
+namespace Aster255\MakerChecker\Events;
 
-use Prismaticoder\MakerChecker\Models\MakerCheckerRequest;
+use Aster255\MakerChecker\Models\MakerCheckerRequest;
 
 class RequestInitiated
 {

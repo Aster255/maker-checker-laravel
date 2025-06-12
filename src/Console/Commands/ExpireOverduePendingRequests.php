@@ -1,11 +1,11 @@
 <?php
 
-namespace Prismaticoder\MakerChecker\Console\Commands;
+namespace Aster255\MakerChecker\Console\Commands;
 
 use Carbon\Carbon;
 use Illuminate\Console\Command;
-use Prismaticoder\MakerChecker\Enums\RequestStatuses;
-use Prismaticoder\MakerChecker\Models\MakerCheckerRequest;
+use Aster255\MakerChecker\Enums\RequestStatuses;
+use Aster255\MakerChecker\Models\MakerCheckerRequest;
 
 class ExpireOverduePendingRequests extends Command
 {
@@ -42,7 +42,7 @@ class ExpireOverduePendingRequests extends Command
     {
         $expirationInMinutes = config('makerchecker.request_expiration_in_minutes');
 
-        if (! $expirationInMinutes) {
+        if (!$expirationInMinutes) {
             $this->error('A value needs to be set for the `request_expiration_in_minutes` configuration for this command to be effected');
 
             return 0;

@@ -1,6 +1,6 @@
 <?php
 
-namespace Prismaticoder\MakerChecker\Tests\Models;
+namespace Aster255\MakerChecker\Tests\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;

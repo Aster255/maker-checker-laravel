@@ -1,6 +1,6 @@
 <?php
 
-namespace Prismaticoder\MakerChecker;
+namespace Aster255\MakerChecker;
 
 use Carbon\Carbon;
 use Closure;
@@ -11,15 +11,15 @@ use Illuminate\Support\Arr;
 use Illuminate\Support\Str;
 use InvalidArgumentException;
 use Laravel\SerializableClosure\SerializableClosure;
-use Prismaticoder\MakerChecker\Contracts\ExecutableRequest;
-use Prismaticoder\MakerChecker\Contracts\MakerCheckerRequestInterface;
-use Prismaticoder\MakerChecker\Enums\Hooks;
-use Prismaticoder\MakerChecker\Enums\RequestStatuses;
-use Prismaticoder\MakerChecker\Enums\RequestTypes;
-use Prismaticoder\MakerChecker\Events\RequestInitiated;
-use Prismaticoder\MakerChecker\Exceptions\DuplicateRequestException;
-use Prismaticoder\MakerChecker\Exceptions\ModelCannotMakeRequests;
-use Prismaticoder\MakerChecker\Exceptions\RequestCouldNotBeInitiated;
+use Aster255\MakerChecker\Contracts\ExecutableRequest;
+use Aster255\MakerChecker\Contracts\MakerCheckerRequestInterface;
+use Aster255\MakerChecker\Enums\Hooks;
+use Aster255\MakerChecker\Enums\RequestStatuses;
+use Aster255\MakerChecker\Enums\RequestTypes;
+use Aster255\MakerChecker\Events\RequestInitiated;
+use Aster255\MakerChecker\Exceptions\DuplicateRequestException;
+use Aster255\MakerChecker\Exceptions\ModelCannotMakeRequests;
+use Aster255\MakerChecker\Exceptions\RequestCouldNotBeInitiated;
 
 class RequestBuilder
 {
@@ -45,7 +45,7 @@ class RequestBuilder
      *
      * @param string $description
      *
-     * @return \Prismaticoder\MakerChecker\RequestBuilder
+     * @return \Aster255\MakerChecker\RequestBuilder
      */
     public function description(string $description): self
     {
@@ -60,7 +60,7 @@ class RequestBuilder
      *
      * @param ...$uniqueIdentifiers
      *
-     * @return \Prismaticoder\MakerChecker\RequestBuilder
+     * @return \Aster255\MakerChecker\RequestBuilder
      */
     public function uniqueBy(...$uniqueIdentifiers): self //TODO: Note that it is only useful for MysQL, Postgres and SQLite 3.3.9+
     {
@@ -74,7 +74,7 @@ class RequestBuilder
      *
      * @param \Illuminate\Database\Eloquent\Model $maker
      *
-     * @return \Prismaticoder\MakerChecker\RequestBuilder
+     * @return \Aster255\MakerChecker\RequestBuilder
      */
     public function madeBy(Model $maker): self
     {
@@ -94,11 +94,11 @@ class RequestBuilder
             $allowedRequestors = [$allowedRequestors];
         }
 
-        if (! is_array($allowedRequestors)) {
+        if (!is_array($allowedRequestors)) {
             $allowedRequestors = [];
         }
 
-        if(! empty($allowedRequestors) && ! in_array($requestingModel, $allowedRequestors)) {
+        if (!empty($allowedRequestors) && !in_array($requestingModel, $allowedRequestors)) {
             throw ModelCannotMakeRequests::create($requestingModel);
         }
     }
@@ -109,14 +109,14 @@ class RequestBuilder
      * @param string $model
      * @param array $payload
      *
-     * @return \Prismaticoder\MakerChecker\RequestBuilder
+     * @return \Aster255\MakerChecker\RequestBuilder
      */
     public function toCreate(string $model, array $payload = []): self
     {
         $this->assertRequestTypeIsNotSet();
 
-        if (! is_subclass_of($model, Model::class)) {
-            throw new RequestCouldNotBeInitiated('Unrecognized model: '.$model);
+        if (!is_subclass_of($model, Model::class)) {
+            throw new RequestCouldNotBeInitiated('Unrecognized model: ' . $model);
         }
 
         $this->request->type = RequestTypes::CREATE;
@@ -132,7 +132,7 @@ class RequestBuilder
      * @param \Illuminate\Database\Eloquent\Model $modelToUpdate
      * @param array $requestedChanges
      *
-     * @return \Prismaticoder\MakerChecker\RequestBuilder
+     * @return \Aster255\MakerChecker\RequestBuilder
      */
     public function toUpdate(Model $modelToUpdate, array $requestedChanges): self
     {
@@ -150,7 +150,7 @@ class RequestBuilder
      *
      * @param \Illuminate\Database\Eloquent\Model $modelToDelete
      *
-     * @return \Prismaticoder\MakerChecker\RequestBuilder
+     * @return \Aster255\MakerChecker\RequestBuilder
      */
     public function toDelete(Model $modelToDelete): self
     {
@@ -165,10 +165,10 @@ class RequestBuilder
     /**
      * Commence initiation of an execute request.
      *
-     * @param string $executableAction the class to execute, it must be an instance of \Prismaticoder\MakerChecker\Contracts\ExecutableRequest
+     * @param string $executableAction the class to execute, it must be an instance of \Aster255\MakerChecker\Contracts\ExecutableRequest
      * @param array $payload
      *
-     * @return \Prismaticoder\MakerChecker\RequestBuilder
+     * @return \Aster255\MakerChecker\RequestBuilder
      */
     public function toExecute(string $executableAction, array $payload = []): self
     {
@@ -176,7 +176,7 @@ class RequestBuilder
 
         $executable = $this->app->make($executableAction);
 
-        if (! $executable instanceof ExecutableRequest) {
+        if (!$executable instanceof ExecutableRequest) {
             throw new InvalidArgumentException(sprintf('The executable action must implement the %s interface.', ExecutableRequest::class));
         }
 
@@ -216,7 +216,7 @@ class RequestBuilder
      *
      * @param \Closure $callback
      *
-     * @return \Prismaticoder\MakerChecker\RequestBuilder
+     * @return \Aster255\MakerChecker\RequestBuilder
      */
     public function beforeApproval(Closure $callback): self
     {
@@ -230,7 +230,7 @@ class RequestBuilder
      *
      * @param \Closure $callback
      *
-     * @return \Prismaticoder\MakerChecker\RequestBuilder
+     * @return \Aster255\MakerChecker\RequestBuilder
      */
     public function afterApproval(Closure $callback): self
     {
@@ -244,7 +244,7 @@ class RequestBuilder
      *
      * @param \Closure $callback
      *
-     * @return \Prismaticoder\MakerChecker\RequestBuilder
+     * @return \Aster255\MakerChecker\RequestBuilder
      */
     public function beforeRejection(Closure $callback): self
     {
@@ -258,7 +258,7 @@ class RequestBuilder
      *
      * @param \Closure $callback
      *
-     * @return \Prismaticoder\MakerChecker\RequestBuilder
+     * @return \Aster255\MakerChecker\RequestBuilder
      */
     public function afterRejection(Closure $callback): self
     {
@@ -272,7 +272,7 @@ class RequestBuilder
      *
      * @param \Closure $callback
      *
-     * @return \Prismaticoder\MakerChecker\RequestBuilder
+     * @return \Aster255\MakerChecker\RequestBuilder
      */
     public function onFailure(Closure $callback): self
     {
@@ -283,7 +283,7 @@ class RequestBuilder
 
     private function setHook(string $hookName, Closure $callback): void
     {
-        if (! in_array($hookName, Hooks::getAll())) {
+        if (!in_array($hookName, Hooks::getAll())) {
             throw new Exception('Invalid hook passed.');
         }
 
@@ -308,13 +308,13 @@ class RequestBuilder
     /**
      * Persist the request into the data store.
      *
-     * @return \Prismaticoder\MakerChecker\Contracts\MakerCheckerRequestInterface
+     * @return \Aster255\MakerChecker\Contracts\MakerCheckerRequestInterface
      */
     public function save(): MakerCheckerRequestInterface
     {
         $request = $this->request;
 
-        if (! isset($request->description)) {
+        if (!isset($request->description)) {
             $request->description = "New {$request->type} request"; //TODO: Change this later to reflect something more dynamic.
         }
 
@@ -360,7 +360,7 @@ class RequestBuilder
     /**
      * Assert that there's no pending request with the same properties as this new request.
      *
-     * @param \Prismaticoder\MakerChecker\Contracts\MakerCheckerRequestInterface $request
+     * @param \Aster255\MakerChecker\Contracts\MakerCheckerRequestInterface $request
      *
      * @return void
      */

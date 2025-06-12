@@ -1,23 +1,23 @@
 <?php
 
-namespace Prismaticoder\MakerChecker;
+namespace Aster255\MakerChecker;
 
 use Carbon\Carbon;
 use Closure;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Database\Eloquent\Model;
-use Prismaticoder\MakerChecker\Contracts\MakerCheckerRequestInterface;
-use Prismaticoder\MakerChecker\Enums\Hooks;
-use Prismaticoder\MakerChecker\Enums\RequestStatuses;
-use Prismaticoder\MakerChecker\Enums\RequestTypes;
-use Prismaticoder\MakerChecker\Events\RequestApproved;
-use Prismaticoder\MakerChecker\Events\RequestFailed;
-use Prismaticoder\MakerChecker\Events\RequestInitiated;
-use Prismaticoder\MakerChecker\Events\RequestRejected;
-use Prismaticoder\MakerChecker\Exceptions\InvalidRequestTypePassed;
-use Prismaticoder\MakerChecker\Exceptions\ModelCannotCheckRequests;
-use Prismaticoder\MakerChecker\Exceptions\RequestCannotBeChecked;
-use Prismaticoder\MakerChecker\Exceptions\RequestCouldNotBeProcessed;
+use Aster255\MakerChecker\Contracts\MakerCheckerRequestInterface;
+use Aster255\MakerChecker\Enums\Hooks;
+use Aster255\MakerChecker\Enums\RequestStatuses;
+use Aster255\MakerChecker\Enums\RequestTypes;
+use Aster255\MakerChecker\Events\RequestApproved;
+use Aster255\MakerChecker\Events\RequestFailed;
+use Aster255\MakerChecker\Events\RequestInitiated;
+use Aster255\MakerChecker\Events\RequestRejected;
+use Aster255\MakerChecker\Exceptions\InvalidRequestTypePassed;
+use Aster255\MakerChecker\Exceptions\ModelCannotCheckRequests;
+use Aster255\MakerChecker\Exceptions\RequestCannotBeChecked;
+use Aster255\MakerChecker\Exceptions\RequestCouldNotBeProcessed;
 
 class MakerCheckerRequestManager
 {
@@ -34,7 +34,7 @@ class MakerCheckerRequestManager
     /**
      * Begin initiating a new request.
      *
-     * @return \Prismaticoder\MakerChecker\RequestBuilder
+     * @return \Aster255\MakerChecker\RequestBuilder
      */
     public function request(): RequestBuilder
     {
@@ -92,11 +92,11 @@ class MakerCheckerRequestManager
     /**
      * Approve a pending maker-checker request.
      *
-     * @param \Prismaticoder\MakerChecker\Contracts\MakerCheckerRequestInterface $request
+     * @param \Aster255\MakerChecker\Contracts\MakerCheckerRequestInterface $request
      * @param \Illuminate\Database\Eloquent\Model $approver
      * @param string|null $remarks
      *
-     * @return \Prismaticoder\MakerChecker\Contracts\MakerCheckerRequestInterface
+     * @return \Aster255\MakerChecker\Contracts\MakerCheckerRequestInterface
      */
     public function approve(MakerCheckerRequestInterface $request, Model $approver, ?string $remarks = null): MakerCheckerRequestInterface
     {
@@ -141,11 +141,11 @@ class MakerCheckerRequestManager
     /**
      * Reject a pending maker-checker request.
      *
-     * @param \Prismaticoder\MakerChecker\Contracts\MakerCheckerRequestInterface $request
+     * @param \Aster255\MakerChecker\Contracts\MakerCheckerRequestInterface $request
      * @param \Illuminate\Database\Eloquent\Model $rejector
      * @param string|null $remarks
      *
-     * @return \Prismaticoder\MakerChecker\Contracts\MakerCheckerRequestInterface
+     * @return \Aster255\MakerChecker\Contracts\MakerCheckerRequestInterface
      */
     public function reject(MakerCheckerRequestInterface $request, Model $rejector, ?string $remarks = null): MakerCheckerRequestInterface
     {
@@ -189,13 +189,13 @@ class MakerCheckerRequestManager
     {
         $requestModelClass = MakerCheckerServiceProvider::getRequestModelClass();
 
-        if (! is_a($request, $requestModelClass)) {
+        if (!is_a($request, $requestModelClass)) {
             throw RequestCannotBeChecked::create("The request model passed must be an instance of {$requestModelClass}");
         }
 
         $this->assertModelCanCheckRequests($checker);
 
-        if (! $request->isOfStatus(RequestStatuses::PENDING)) {
+        if (!$request->isOfStatus(RequestStatuses::PENDING)) {
             throw RequestCannotBeChecked::create('Cannot act on a non-pending request.');
         }
 
@@ -254,11 +254,11 @@ class MakerCheckerRequestManager
             $allowedCheckers = [$allowedCheckers];
         }
 
-        if (! is_array($allowedCheckers)) {
+        if (!is_array($allowedCheckers)) {
             $allowedCheckers = [];
         }
 
-        if(! empty($allowedCheckers) && ! in_array($checkerModel, $allowedCheckers)) {
+        if (!empty($allowedCheckers) && !in_array($checkerModel, $allowedCheckers)) {
             throw ModelCannotCheckRequests::create($checkerModel);
         }
     }

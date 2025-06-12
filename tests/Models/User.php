@@ -1,10 +1,10 @@
 <?php
 
-namespace Prismaticoder\MakerChecker\Tests\Models;
+namespace Aster255\MakerChecker\Tests\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Prismaticoder\MakerChecker\Traits\ChecksRequests;
-use Prismaticoder\MakerChecker\Traits\MakesRequests;
+use Aster255\MakerChecker\Traits\ChecksRequests;
+use Aster255\MakerChecker\Traits\MakesRequests;
 
 class User extends Model
 {

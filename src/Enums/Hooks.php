@@ -1,6 +1,6 @@
 <?php
 
-namespace Prismaticoder\MakerChecker\Enums;
+namespace Aster255\MakerChecker\Enums;
 
 abstract class Hooks
 {

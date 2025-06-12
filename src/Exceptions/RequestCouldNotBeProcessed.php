@@ -1,6 +1,6 @@
 <?php
 
-namespace Prismaticoder\MakerChecker\Exceptions;
+namespace Aster255\MakerChecker\Exceptions;
 
 use RuntimeException;
 use Throwable;

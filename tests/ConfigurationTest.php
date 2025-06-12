@@ -1,19 +1,19 @@
 <?php
 
-namespace Prismaticoder\MakerChecker\Tests;
+namespace Aster255\MakerChecker\Tests;
 
 use Carbon\Carbon;
 use Illuminate\Foundation\Testing\WithFaker;
 use Illuminate\Support\Facades\Event;
-use Prismaticoder\MakerChecker\Events\RequestInitiated;
-use Prismaticoder\MakerChecker\Exceptions\DuplicateRequestException;
-use Prismaticoder\MakerChecker\Exceptions\InvalidRequestModelSet;
-use Prismaticoder\MakerChecker\Exceptions\ModelCannotCheckRequests;
-use Prismaticoder\MakerChecker\Exceptions\ModelCannotMakeRequests;
-use Prismaticoder\MakerChecker\Exceptions\RequestCannotBeChecked;
-use Prismaticoder\MakerChecker\Facades\MakerChecker;
-use Prismaticoder\MakerChecker\Tests\Models\Article;
-use Prismaticoder\MakerChecker\Tests\Models\User;
+use Aster255\MakerChecker\Events\RequestInitiated;
+use Aster255\MakerChecker\Exceptions\DuplicateRequestException;
+use Aster255\MakerChecker\Exceptions\InvalidRequestModelSet;
+use Aster255\MakerChecker\Exceptions\ModelCannotCheckRequests;
+use Aster255\MakerChecker\Exceptions\ModelCannotMakeRequests;
+use Aster255\MakerChecker\Exceptions\RequestCannotBeChecked;
+use Aster255\MakerChecker\Facades\MakerChecker;
+use Aster255\MakerChecker\Tests\Models\Article;
+use Aster255\MakerChecker\Tests\Models\User;
 
 class ConfigurationTest extends TestCase
 {

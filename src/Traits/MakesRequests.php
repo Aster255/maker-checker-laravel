@@ -1,10 +1,10 @@
 <?php
 
-namespace Prismaticoder\MakerChecker\Traits;
+namespace Aster255\MakerChecker\Traits;
 
 use Illuminate\Database\Eloquent\Model;
-use Prismaticoder\MakerChecker\Facades\MakerChecker;
-use Prismaticoder\MakerChecker\RequestBuilder;
+use Aster255\MakerChecker\Facades\MakerChecker;
+use Aster255\MakerChecker\RequestBuilder;
 
 trait MakesRequests
 {

@@ -1,11 +1,11 @@
 <?php
 
-namespace Prismaticoder\MakerChecker\Tests\Executables;
+namespace Aster255\MakerChecker\Tests\Executables;
 
 use Illuminate\Support\Facades\Cache;
-use Prismaticoder\MakerChecker\Contracts\ExecutableRequest;
-use Prismaticoder\MakerChecker\Contracts\MakerCheckerRequestInterface;
-use Prismaticoder\MakerChecker\Tests\Models\Article;
+use Aster255\MakerChecker\Contracts\ExecutableRequest;
+use Aster255\MakerChecker\Contracts\MakerCheckerRequestInterface;
+use Aster255\MakerChecker\Tests\Models\Article;
 
 class CreateArticleWithCacheEntry extends ExecutableRequest
 {

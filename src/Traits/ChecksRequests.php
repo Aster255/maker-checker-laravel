@@ -1,9 +1,9 @@
 <?php
 
-namespace Prismaticoder\MakerChecker\Traits;
+namespace Aster255\MakerChecker\Traits;
 
-use Prismaticoder\MakerChecker\Contracts\MakerCheckerRequestInterface;
-use Prismaticoder\MakerChecker\Facades\MakerChecker;
+use Aster255\MakerChecker\Contracts\MakerCheckerRequestInterface;
+use Aster255\MakerChecker\Facades\MakerChecker;
 
 trait ChecksRequests
 {

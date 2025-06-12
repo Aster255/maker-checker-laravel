@@ -1,12 +1,12 @@
 <?php
 
-namespace Prismaticoder\MakerChecker\Models;
+namespace Aster255\MakerChecker\Models;
 
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\MorphTo;
-use Prismaticoder\MakerChecker\Contracts\MakerCheckerRequestInterface;
-use Prismaticoder\MakerChecker\Enums\RequestStatuses;
+use Aster255\MakerChecker\Contracts\MakerCheckerRequestInterface;
+use Aster255\MakerChecker\Enums\RequestStatuses;
 
 class MakerCheckerRequest extends Model implements MakerCheckerRequestInterface
 {

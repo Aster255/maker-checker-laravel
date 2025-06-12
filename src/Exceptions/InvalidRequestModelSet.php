@@ -1,10 +1,10 @@
 <?php
 
-namespace Prismaticoder\MakerChecker\Exceptions;
+namespace Aster255\MakerChecker\Exceptions;
 
 use Exception;
 use Illuminate\Database\Eloquent\Model;
-use Prismaticoder\MakerChecker\Contracts\MakerCheckerRequestInterface;
+use Aster255\MakerChecker\Contracts\MakerCheckerRequestInterface;
 
 class InvalidRequestModelSet extends Exception
 {

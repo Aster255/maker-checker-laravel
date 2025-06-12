@@ -1,14 +1,14 @@
 <?php
 
-namespace Prismaticoder\MakerChecker\Tests;
+namespace Aster255\MakerChecker\Tests;
 
 use CreateMakerCheckerRequestsTable;
 use Illuminate\Contracts\Config\Repository;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Orchestra\Testbench\TestCase as TestbenchTestCase;
-use Prismaticoder\MakerChecker\MakerCheckerServiceProvider;
-use Prismaticoder\MakerChecker\Tests\Models\Article;
-use Prismaticoder\MakerChecker\Tests\Models\User;
+use Aster255\MakerChecker\MakerCheckerServiceProvider;
+use Aster255\MakerChecker\Tests\Models\Article;
+use Aster255\MakerChecker\Tests\Models\User;
 
 abstract class TestCase extends TestbenchTestCase
 {
@@ -74,7 +74,7 @@ abstract class TestCase extends TestbenchTestCase
             ]);
 
             // Load your package's configuration file
-            $makerCheckerConfig = require __DIR__.'/../config/makerchecker.php';
+            $makerCheckerConfig = require __DIR__ . '/../config/makerchecker.php';
             $config->set('makerchecker', $makerCheckerConfig);
         });
     }
@@ -86,12 +86,12 @@ abstract class TestCase extends TestbenchTestCase
      */
     protected function defineDatabaseMigrations()
     {
-        $this->loadMigrationsFrom(__DIR__.'/database/migrations');
+        $this->loadMigrationsFrom(__DIR__ . '/database/migrations');
     }
 
     protected function migrateMakerCheckerRequestsTable()
     {
-        require_once __DIR__.'/../database/migrations/create_maker_checker_requests_table.php.stub';
+        require_once __DIR__ . '/../database/migrations/create_maker_checker_requests_table.php.stub';
 
         (new CreateMakerCheckerRequestsTable())->up(); //TODO: find another way to do this without going through this means
     }
