@@ -1,5 +1,5 @@
 {
-  "name": "prismaticoder/maker-checker-laravel",
+  "name": "aster255/maker-checker-laravel",
   "description": "A package for simplifying the integration of a maker-checker approval process to your Laravel application.",
   "keywords": [
     "php",
