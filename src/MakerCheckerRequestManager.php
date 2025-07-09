@@ -106,7 +106,7 @@ class MakerCheckerRequestManager
             'status' => RequestStatuses::APPROVED,
             'checker_type' => $approver->getMorphClass(),
             'checker_id' => $approver->getKey(),
-            'checked_at' => Carbon::now(),
+            'checked_at' => Carbon::now('Asia/Manila'),
             'remarks' => $remarks,
         ]);
 
