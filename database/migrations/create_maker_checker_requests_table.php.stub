@@ -26,8 +26,7 @@ class CreateMakerCheckerRequestsTable extends Migration
             $table->morphs('maker', 'maker');
             $table->timestamp('made_at');
 
-            $table->json('original')->nullable();
-            $table->json('payload')->nullable(); 
+            $table->json('payload')->nullable();
             $table->json('metadata')->nullable();
 
             $table->nullableMorphs('checker');
