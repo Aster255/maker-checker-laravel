@@ -140,6 +140,8 @@ class RequestBuilder
 
         $this->request->type = RequestTypes::UPDATE;
         $this->request->subject()->associate($modelToUpdate);
+
+        $this->request->original = $modelToUpdate->toArray();
         $this->request->payload = $requestedChanges;
 
         return $this;
