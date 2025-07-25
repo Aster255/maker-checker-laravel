@@ -13,6 +13,7 @@ class MakerCheckerRequest extends Model implements MakerCheckerRequestInterface
     protected $guarded = ['id', 'code'];
 
     protected $casts = [
+        'original' => 'array',
         'payload' => 'array',
         'metadata' => 'array',
     ];
